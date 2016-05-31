@@ -1,0 +1,7 @@
+F:\Coding\WHD-Crawler\bin\Debug\WHD-Crawler.exe
+F:\Coding\WHD-Crawler\bin\Debug\WHD-Crawler.pdb
+F:\Coding\WHD-Crawler\obj\Debug\WHD-Crawler.csprojResolveAssemblyReference.cache
+F:\Coding\WHD-Crawler\obj\Debug\WHD-Crawler.exe
+F:\Coding\WHD-Crawler\obj\Debug\WHD-Crawler.pdb
+F:\Coding\WHD-Crawler\obj\Debug\WHD_Crawler.MainForm.resources
+F:\Coding\WHD-Crawler\obj\Debug\WHD-Crawler.csproj.GenerateResource.Cache
