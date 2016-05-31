@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WHD_Crawler
@@ -58,8 +59,23 @@ namespace WHD_Crawler
 				if(check != -1)
 				{price = price.Substring(0,check);}
 				
-				string name = names[i];
-				name = name.Replace("-","");
+				price = price.Trim();
+				
+				if(names.Count < i)
+				{
+				
+				}
+				
+				string name;
+				
+				try
+				{name = names[i];}
+					catch(ArgumentOutOfRangeException)
+					{continue;}
+
+				//TODO: Seems like there is a weird bug with Windows10 and UTF-8.
+				//The name string may contain a SOFT HYPHEN (C2AD, 0xC2 0xAD)
+				name = name.Trim();
 				string ret = "Idealo ("+name+"): "+price+System.Environment.NewLine;
 				idealo.Add(ret);
 			}
@@ -89,7 +105,7 @@ namespace WHD_Crawler
 					try
 					{
 					start = HTML.IndexOf(html_pattern_start,offset);
-					real_start = HTML.IndexOf(html_pattern_real_start,start);
+					real_start = HTML.IndexOf(html_pattern_real_start,start+1);
 					end = HTML.IndexOf(html_pattern_end,real_start);}
 						catch(ArgumentOutOfRangeException)
 						{return html_list;}
@@ -100,6 +116,8 @@ namespace WHD_Crawler
 					}
 					
 					string html_extract = HTML.Substring(real_start+html_pattern_real_start.Length,end-real_start-html_pattern_real_start.Length);
+					
+					
 					
 					html_list.Add(html_extract);
 					offset = end;
