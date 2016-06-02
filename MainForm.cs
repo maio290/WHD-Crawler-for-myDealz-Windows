@@ -45,7 +45,7 @@ namespace WHD_Crawler
 			productname = productname.Replace(" ","+");
 			string idealourl = "http://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q="+productname;
 			string idealohtml = get_html_from_url_utf8(idealourl);
-		
+
 			List<string> prices = extract_all_html(idealohtml,"<span class=\"price bold nobr block fs-18\">","</span>");
 			List<string> names = extract_idealo_names(idealohtml);
 			List<string> idealo = new List<string>();
@@ -60,12 +60,8 @@ namespace WHD_Crawler
 				{price = price.Substring(0,check);}
 				
 				price = price.Trim();
-				
-				if(names.Count < i)
-				{
-				
-				}
-				
+				price = price.Replace("€","");
+								
 				string name;
 				
 				try
@@ -76,14 +72,15 @@ namespace WHD_Crawler
 				//TODO: Seems like there is a weird bug with Windows10 and UTF-8.
 				//The name string may contain a SOFT HYPHEN (C2AD, 0xC2 0xAD)
 				name = name.Trim();
-				string ret = "Idealo ("+name+"): "+price+System.Environment.NewLine;
+				
+				
+				string ret = "Idealo ("+name+"): "+price;
 				idealo.Add(ret);
 			}
 			
 			return idealo;
 		}
-		
-		
+				
 		// extract functions for idealo 
 		
 		List<string> extract_idealo_names(string HTML)
@@ -228,11 +225,16 @@ namespace WHD_Crawler
 		
 		string extract_price(string HTML)
 		{
-		
+			int start;
+			int end;
 			string html_pattern_start = "<b>Preis:</b>";
 			string html_pattern_end = "<br />";
-			int start = HTML.IndexOf(html_pattern_start);
-			int end = HTML.IndexOf(html_pattern_end,start);
+			
+			try
+			{start = HTML.IndexOf(html_pattern_start);
+			end = HTML.IndexOf(html_pattern_end,start);}
+				catch(ArgumentOutOfRangeException)
+				{return "-1";}
 			
 			if(start == -1 || end == -1)
 			{
@@ -411,6 +413,12 @@ namespace WHD_Crawler
 			string TAG = "&tag=80098-21";
 			Update_Progressbar(0);
 			Idealo.Text = "";
+			string Euro = " EUR";
+			
+			if(Euro_Checkbox.Checked == true)
+			{
+			Euro = " €";
+			}
 			
 			
 			if(URL_TextBox.TextLength == 0)
@@ -439,9 +447,9 @@ namespace WHD_Crawler
 				price = extract_price(html);
 				double price_dbl = Convert.ToDouble(price.Replace(",","."));
 				if(price_dbl == -1)
-				{price = "Kein Neupreis auf Amazon vorhanden";
+				{price = "Kein Neupreis auf Amazon vorhanden!";
 				}else{
-					price = "Neupreis auf Amazon.de: " + price + " EUR";
+					price = "Neupreis auf Amazon.de: " + price + Euro;
 					}
 				
 				// Ok, now we are starting to fetch the actual WHD offers
@@ -495,7 +503,7 @@ namespace WHD_Crawler
 								case "Akzeptabel":
 									if(acceptable == false)
 									{
-										offers.Add("Akzeptabel - " + extract_whd_price(offer) + " EUR");
+										offers.Add("Akzeptabel - " + extract_whd_price(offer) + Euro);
 										acceptable = true;
 									}
 								break;
@@ -503,7 +511,7 @@ namespace WHD_Crawler
 								case "Gut":
 									if(good == false)
 									{
-										offers.Add("Gut - " + extract_whd_price(offer) + " EUR");
+										offers.Add("Gut - " + extract_whd_price(offer) + Euro);
 										good = true;									
 									}
 								break;
@@ -511,7 +519,7 @@ namespace WHD_Crawler
 								case "Sehr gut":
 									if(very_good == false)
 									{
-										offers.Add("Sehr gut - " + extract_whd_price(offer) + " EUR");
+										offers.Add("Sehr gut - " + extract_whd_price(offer) + Euro);
 										very_good = true;									
 									}
 								break;
@@ -519,7 +527,7 @@ namespace WHD_Crawler
 								case "Wie neu":
 									if(as_new == false) 
 									{
-										offers.Add("Wie neu - " + extract_whd_price(offer) + " EUR");
+										offers.Add("Wie neu - " + extract_whd_price(offer) + Euro);
 										as_new = true;									
 									}
 								break;
@@ -565,15 +573,16 @@ namespace WHD_Crawler
 				{
 					if(idealo.Count == 1)
 					{
-						Output.Text += idealo[0];
-						Output.Text += System.Environment.NewLine;						
+						Output.Text += idealo[0]+Euro+System.Environment.NewLine;
+						if(NewLine_PVL.Checked == true)
+						{Output.Text += System.Environment.NewLine;}						
 					}
 					
 					if(idealo.Count > 1)
 					{
 						foreach(string pvl in idealo)
 						{
-							Idealo.Text += pvl;
+							Idealo.Text += pvl+Euro+System.Environment.NewLine;
 						}
 					}
 				}
@@ -588,6 +597,7 @@ namespace WHD_Crawler
 				
 				if(AppendText.Checked == true)
 				{
+					Output.Text += System.Environment.NewLine;
 					Output.Text += System.Environment.NewLine;
 				}
 				

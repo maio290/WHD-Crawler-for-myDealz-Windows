@@ -40,11 +40,13 @@ namespace WHD_Crawler
 			this.Idealo = new System.Windows.Forms.TextBox();
 			this.Output = new System.Windows.Forms.TextBox();
 			this.Optionen_GroupBox = new System.Windows.Forms.GroupBox();
+			this.NewLine_PVL = new System.Windows.Forms.CheckBox();
 			this.AppendText = new System.Windows.Forms.CheckBox();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.Copyright = new System.Windows.Forms.ToolStripStatusLabel();
 			this.DL_Progress = new System.Windows.Forms.ProgressBar();
 			this.label1 = new System.Windows.Forms.Label();
+			this.Euro_Checkbox = new System.Windows.Forms.CheckBox();
 			this.PVL_GroupBox.SuspendLayout();
 			this.Output_GroupBox.SuspendLayout();
 			this.Optionen_GroupBox.SuspendLayout();
@@ -153,6 +155,8 @@ namespace WHD_Crawler
 			// 
 			// Optionen_GroupBox
 			// 
+			this.Optionen_GroupBox.Controls.Add(this.Euro_Checkbox);
+			this.Optionen_GroupBox.Controls.Add(this.NewLine_PVL);
 			this.Optionen_GroupBox.Controls.Add(this.AppendText);
 			this.Optionen_GroupBox.Controls.Add(this.PVL_GroupBox);
 			this.Optionen_GroupBox.Location = new System.Drawing.Point(28, 355);
@@ -161,6 +165,15 @@ namespace WHD_Crawler
 			this.Optionen_GroupBox.TabIndex = 8;
 			this.Optionen_GroupBox.TabStop = false;
 			this.Optionen_GroupBox.Text = "Optionen";
+			// 
+			// NewLine_PVL
+			// 
+			this.NewLine_PVL.Location = new System.Drawing.Point(6, 49);
+			this.NewLine_PVL.Name = "NewLine_PVL";
+			this.NewLine_PVL.Size = new System.Drawing.Size(139, 24);
+			this.NewLine_PVL.TabIndex = 10;
+			this.NewLine_PVL.Text = "Leerzeile nach PVL";
+			this.NewLine_PVL.UseVisualStyleBackColor = true;
 			// 
 			// AppendText
 			// 
@@ -205,6 +218,15 @@ namespace WHD_Crawler
 			this.label1.Text = "Fortschritt:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// Euro_Checkbox
+			// 
+			this.Euro_Checkbox.Location = new System.Drawing.Point(6, 79);
+			this.Euro_Checkbox.Name = "Euro_Checkbox";
+			this.Euro_Checkbox.Size = new System.Drawing.Size(139, 24);
+			this.Euro_Checkbox.TabIndex = 11;
+			this.Euro_Checkbox.Text = "Verwende € statt EUR";
+			this.Euro_Checkbox.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +252,8 @@ namespace WHD_Crawler
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.CheckBox Euro_Checkbox;
+		private System.Windows.Forms.CheckBox NewLine_PVL;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ProgressBar DL_Progress;
