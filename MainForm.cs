@@ -441,6 +441,7 @@ namespace WHD_Crawler
 				try
 				{
 				discount = Convert.ToDouble(Discount_TB.Text);
+				
 				discount_fraction =  (1-(discount/100));
 				}
 				catch(FormatException)
@@ -533,7 +534,7 @@ namespace WHD_Crawler
 											
 											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
 											double final_price = tmp_price * discount_fraction;
-											offers.Add("Akzeptabel - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);
+											offers.Add("Akzeptabel - " + String.Format("{0:0.00}",tmp_price) + Euro + " * " + String.Format("{0:0.00}",discount_fraction) + " = " + String.Format("{0:0.00}",Math.Round(final_price,2)) + Euro);
 											
 										}
 										else
@@ -552,7 +553,7 @@ namespace WHD_Crawler
 										{
 											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
 											double final_price = tmp_price * discount_fraction;	
-											offers.Add("Gut - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+											offers.Add("Gut - " + String.Format("{0:0.00}",tmp_price) + Euro + " * " + String.Format("{0:0.00}",discount_fraction) + " = " + String.Format("{0:0.00}",Math.Round(final_price,2)) + Euro);
 										}
 										else
 										{
@@ -570,7 +571,7 @@ namespace WHD_Crawler
 										{
 											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
 											double final_price = tmp_price * discount_fraction;		
-											offers.Add("Sehr gut - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+											offers.Add("Sehr gut - " + String.Format("{0:0.00}",tmp_price) + Euro + " * " + String.Format("{0:0.00}",discount_fraction) + " = " + String.Format("{0:0.00}",Math.Round(final_price,2)) + Euro);
 										}
 										else
 										{
@@ -587,7 +588,7 @@ namespace WHD_Crawler
 										{
 											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
 											double final_price = tmp_price * discount_fraction;		
-											offers.Add("Wie neu - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+											offers.Add("Wie neu - " + String.Format("{0:0.00}",tmp_price) + Euro + " * " + String.Format("{0:0.00}",discount_fraction) + " = " + String.Format("{0:0.00}",Math.Round(final_price,2)) + Euro);
 										}
 										else
 										{
