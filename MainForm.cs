@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WHD_Crawler
@@ -222,6 +221,7 @@ namespace WHD_Crawler
 			return price;
 		
 		}
+
 		
 		string extract_price(string HTML)
 		{
@@ -411,6 +411,11 @@ namespace WHD_Crawler
 			string name;
 			string price;
 			string TAG = "&tag=80098-21";
+			
+			double discount = 0.00;
+			double discount_fraction = 0.00;
+			bool discount_active = false;
+			
 			Update_Progressbar(0);
 			Idealo.Text = "";
 			string Euro = " EUR";
@@ -426,6 +431,26 @@ namespace WHD_Crawler
 				MessageBox.Show("Bitte einen Link in das Textfeld eintragen!");
 				return;
 			 }
+			
+			if(Discount_TB.Text.Length > 0)
+			{
+				discount_active = true;
+				
+				Discount_TB.Text = Discount_TB.Text.Replace(",",".");
+				
+				try
+				{
+				discount = Convert.ToDouble(Discount_TB.Text);
+				discount_fraction =  (1-(discount/100));
+				}
+				catch(FormatException)
+				{
+					MessageBox.Show("Bitte den Rabatt in der Form 00 bzw. 00.00 eintragen!");
+					Discount_TB.Text = "";
+					return;
+				}
+			}
+			
 			// This is the equivalent of get_data 
 			// First of all, we are trying to get the article name and the new price of the article, inherit the code as you like.
 			
@@ -503,7 +528,19 @@ namespace WHD_Crawler
 								case "Akzeptabel":
 									if(acceptable == false)
 									{
+										if(discount_active == true)
+										{
+											
+											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
+											double final_price = tmp_price * discount_fraction;
+											offers.Add("Akzeptabel - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);
+											
+										}
+										else
+										{
 										offers.Add("Akzeptabel - " + extract_whd_price(offer) + Euro);
+										}
+										
 										acceptable = true;
 									}
 								break;
@@ -511,7 +548,17 @@ namespace WHD_Crawler
 								case "Gut":
 									if(good == false)
 									{
+										if(discount_active == true)
+										{
+											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
+											double final_price = tmp_price * discount_fraction;	
+											offers.Add("Gut - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+										}
+										else
+										{
 										offers.Add("Gut - " + extract_whd_price(offer) + Euro);
+										}
+										
 										good = true;									
 									}
 								break;
@@ -519,7 +566,16 @@ namespace WHD_Crawler
 								case "Sehr gut":
 									if(very_good == false)
 									{
+										if(discount_active == true)
+										{
+											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
+											double final_price = tmp_price * discount_fraction;		
+											offers.Add("Sehr gut - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+										}
+										else
+										{
 										offers.Add("Sehr gut - " + extract_whd_price(offer) + Euro);
+										}
 										very_good = true;									
 									}
 								break;
@@ -527,7 +583,16 @@ namespace WHD_Crawler
 								case "Wie neu":
 									if(as_new == false) 
 									{
+										if(discount_active == true)
+										{
+											double tmp_price = Convert.ToDouble(extract_whd_price(offer));
+											double final_price = tmp_price * discount_fraction;		
+											offers.Add("Wie neu - " + tmp_price + Euro + " * " + discount_fraction + " = " + Math.Round(final_price,2) + Euro);											
+										}
+										else
+										{
 										offers.Add("Wie neu - " + extract_whd_price(offer) + Euro);
+										}
 										as_new = true;									
 									}
 								break;

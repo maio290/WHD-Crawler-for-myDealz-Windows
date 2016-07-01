@@ -29,6 +29,7 @@ namespace WHD_Crawler
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.URL_TextBox = new System.Windows.Forms.TextBox();
 			this.Label_URL = new System.Windows.Forms.Label();
 			this.Submit = new System.Windows.Forms.Button();
@@ -40,16 +41,20 @@ namespace WHD_Crawler
 			this.Idealo = new System.Windows.Forms.TextBox();
 			this.Output = new System.Windows.Forms.TextBox();
 			this.Optionen_GroupBox = new System.Windows.Forms.GroupBox();
+			this.Discount_GB = new System.Windows.Forms.GroupBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.Discount_TB = new System.Windows.Forms.TextBox();
+			this.Euro_Checkbox = new System.Windows.Forms.CheckBox();
 			this.NewLine_PVL = new System.Windows.Forms.CheckBox();
 			this.AppendText = new System.Windows.Forms.CheckBox();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.Copyright = new System.Windows.Forms.ToolStripStatusLabel();
 			this.DL_Progress = new System.Windows.Forms.ProgressBar();
 			this.label1 = new System.Windows.Forms.Label();
-			this.Euro_Checkbox = new System.Windows.Forms.CheckBox();
 			this.PVL_GroupBox.SuspendLayout();
 			this.Output_GroupBox.SuspendLayout();
 			this.Optionen_GroupBox.SuspendLayout();
+			this.Discount_GB.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -134,7 +139,7 @@ namespace WHD_Crawler
 			// 
 			// Idealo
 			// 
-			this.Idealo.Location = new System.Drawing.Point(6, 282);
+			this.Idealo.Location = new System.Drawing.Point(0, 282);
 			this.Idealo.Multiline = true;
 			this.Idealo.Name = "Idealo";
 			this.Idealo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -155,6 +160,7 @@ namespace WHD_Crawler
 			// 
 			// Optionen_GroupBox
 			// 
+			this.Optionen_GroupBox.Controls.Add(this.Discount_GB);
 			this.Optionen_GroupBox.Controls.Add(this.Euro_Checkbox);
 			this.Optionen_GroupBox.Controls.Add(this.NewLine_PVL);
 			this.Optionen_GroupBox.Controls.Add(this.AppendText);
@@ -165,6 +171,42 @@ namespace WHD_Crawler
 			this.Optionen_GroupBox.TabIndex = 8;
 			this.Optionen_GroupBox.TabStop = false;
 			this.Optionen_GroupBox.Text = "Optionen";
+			// 
+			// Discount_GB
+			// 
+			this.Discount_GB.Controls.Add(this.label3);
+			this.Discount_GB.Controls.Add(this.Discount_TB);
+			this.Discount_GB.Location = new System.Drawing.Point(461, 79);
+			this.Discount_GB.Name = "Discount_GB";
+			this.Discount_GB.Size = new System.Drawing.Size(156, 50);
+			this.Discount_GB.TabIndex = 12;
+			this.Discount_GB.TabStop = false;
+			this.Discount_GB.Text = "Discount";
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(75, 17);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(69, 23);
+			this.label3.TabIndex = 1;
+			this.label3.Text = "% Rabatt";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// Discount_TB
+			// 
+			this.Discount_TB.Location = new System.Drawing.Point(6, 19);
+			this.Discount_TB.Name = "Discount_TB";
+			this.Discount_TB.Size = new System.Drawing.Size(63, 20);
+			this.Discount_TB.TabIndex = 0;
+			// 
+			// Euro_Checkbox
+			// 
+			this.Euro_Checkbox.Location = new System.Drawing.Point(6, 79);
+			this.Euro_Checkbox.Name = "Euro_Checkbox";
+			this.Euro_Checkbox.Size = new System.Drawing.Size(139, 24);
+			this.Euro_Checkbox.TabIndex = 11;
+			this.Euro_Checkbox.Text = "Verwende € statt EUR";
+			this.Euro_Checkbox.UseVisualStyleBackColor = true;
 			// 
 			// NewLine_PVL
 			// 
@@ -218,15 +260,6 @@ namespace WHD_Crawler
 			this.label1.Text = "Fortschritt:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// Euro_Checkbox
-			// 
-			this.Euro_Checkbox.Location = new System.Drawing.Point(6, 79);
-			this.Euro_Checkbox.Name = "Euro_Checkbox";
-			this.Euro_Checkbox.Size = new System.Drawing.Size(139, 24);
-			this.Euro_Checkbox.TabIndex = 11;
-			this.Euro_Checkbox.Text = "Verwende € statt EUR";
-			this.Euro_Checkbox.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,17 +274,25 @@ namespace WHD_Crawler
 			this.Controls.Add(this.Label_URL);
 			this.Controls.Add(this.URL_TextBox);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.Text = "WHD-Crawler for myDealz.de";
+			this.TopMost = true;
 			this.PVL_GroupBox.ResumeLayout(false);
 			this.Output_GroupBox.ResumeLayout(false);
 			this.Output_GroupBox.PerformLayout();
 			this.Optionen_GroupBox.ResumeLayout(false);
+			this.Discount_GB.ResumeLayout(false);
+			this.Discount_GB.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.TextBox Discount_TB;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.GroupBox Discount_GB;
 		private System.Windows.Forms.CheckBox Euro_Checkbox;
 		private System.Windows.Forms.CheckBox NewLine_PVL;
 		private System.Windows.Forms.Label label2;
